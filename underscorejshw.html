@@ -36,6 +36,185 @@
 
         var specialStudents = _.filter(students, checkIfFirstNameBeforeLastName);
         console.log(specialStudents);
+        
+         // 02.Write function that finds the first name and last name of all students with 
+        // age between 18 and 24. Use Underscore.js
+
+
+        var Person = Class.create({
+            init: function (fname, lname, age) {
+                this.fname = fname;
+                this.lname = lname;
+                this.age = age;
+            },
+            toString: function () {
+                return this.fname + " " + this.lname;
+            }
+        });
+
+        var angel = new Person("Angel", "Batkov", 18);
+        var bobi = new Person("Bobi", "Atanasov", 21);
+        var minka = new Person("Minka", "Nikolova", 22);
+        var nikolai = new Person("Nikolai", "Monev", 40);
+
+        var students = [angel, bobi, minka, nikolai];
+
+        function checkAge(student) {
+            return (student.age > 18 && student.age < 24);
+        }
+
+        var specialStudents = _.filter(students, checkAge).join(', ');
+        console.log(specialStudents);
+        
+        
+         // 03.Write a function that by a given array of students finds the student with highest marks
+
+        var Person = Class.create({
+            init: function (fname, lname, mark) {
+                this.fname = fname;
+                this.lname = lname;
+                this.mark = mark;
+            },
+            toString: function () {
+                return this.fname + " " + this.lname;
+            }
+        });
+
+        var angel = new Person("Angel", "Batkov", 2);
+        var bobi = new Person("Bobi", "Atanasov", 3);
+        var minka = new Person("Minka", "Nikolova", 5);
+        var nikolai = new Person("Nikolai", "Monev", 2);
+
+        var students = [angel, bobi, minka, nikolai];
+
+        var smartestStudent = _.max(students,
+                                        function (student) {
+                                        return student.mark;
+                                        });
+
+        console.log(smartestStudent.toString());
+        
+        
+         //04.Write a function that by a given array of animals, groups them by species and sorts them by number of legs
+        var Animal = Class.create({
+            init: function (species, color, legs) {
+                this.species = species;
+                this.color = color;
+                this.legs = legs;
+            }
+        });
+
+        var animals = [new Animal("fish","red", 0),
+                       new Animal("snake", "white", 0),
+                       new Animal("snake", "blue", 0),
+                       new Animal("snake", "red", 0),
+                       new Animal("snake", "mandarin", 0),
+                       new Animal("dqdo gosho s bastun", "bqla kosa", 3),
+                       new Animal("fish", "green", 0),
+                       new Animal("dog", "black", 4),
+                       new Animal("dog", "white", 4),
+                       new Animal("cat", "black", 4), ]
+
+        var groupedSpeciesByLegs =
+            _.sortBy(
+            _.groupBy(animals, 'species'),
+            function (category) {
+                return category[0].legs;
+        });
+        console.log(groupedSpeciesByLegs);
+        
+        
+           // 05. By a given array of animals, find the total number of legs
+        // Each animal can have 2, 4, 6, 8 or 100 legs
+
+        var Animal = Class.create({
+            init: function (species, color, legs) {
+                this.species = species;
+                this.color = color;
+                this.legs = legs;
+            }
+        });
+
+        var animals = [new Animal("chovekSBastun", "white", 3),
+                       new Animal("dog", "black", 4),
+                       new Animal("human", "black", 2),
+                       new Animal("centipede", "black", 100),
+                       new Animal("dog", "white", 4),
+                       new Animal("cat", "black", 4), ]
+
+        var allLegsInTheCollectionCount = 0;
+
+        var allLegsInTheCollection =
+            _.each(
+            _.countBy(animals,
+            function (animal) {
+                return animal.legs;
+            })
+            , function (key,value) {
+                allLegsInTheCollectionCount += key * value;
+            });
+
+        console.log(allLegsInTheCollectionCount);
+        
+        
+         //06.By a given collection of books, find the most popular author 
+        //(the author with the biggest number of books)
+
+        var Author = Class.create({
+            init: function (name, books) {
+                this.name = name;
+                this.books = books;
+            }
+        });
+
+        var authors = [new Author("Nikolay Karaivanov", 10),
+            new Author("Georgi Penev", 15),
+            new Author("Ivan Popandov", 150),
+            new Author("Karaivan Popiordanov", 105),
+        ];
+
+        var mostPopularAuthor = _.max(authors, function (author) {
+            return author.books;
+        });
+
+        console.log(mostPopularAuthor.name);
+        
+        
+        //07.By an array of people find the most common first and last name. Use underscore.
+
+        var Person = Class.create({
+            init: function (fname, lname, mark) {
+                this.fname = fname;
+                this.lname = lname;
+            }
+        });
+
+        var people = [new Person("Mario", "Gruev"),
+            new Person("Sancho", "Pansa"),
+            new Person("Gruio", "Gruev"),
+            new Person("Gruio", "Milenov"),
+            new Person("Koko", "Gruev"), ];
+
+        var mostCommonFirstName = _.countBy(people, function (person) {
+            return person.fname
+        });
+
+        var indexFName = _.max(mostCommonFirstName);
+        
+        mostCommonFirstName = _.invert(mostCommonFirstName);
+
+        console.log("fname -> " + mostCommonFirstName[indexFName]);
+
+
+        var mostCommonLastName = _.countBy(people, function (person) {
+            return person.lname;
+        });
+
+        var indexLName = _.max(mostCommonLastName);
+
+        mostCommonLastName = _.invert(mostCommonLastName);
+
+        console.log("lname -> " + mostCommonLastName[indexLName]);
     </script>
 
 </body>
